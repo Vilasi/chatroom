@@ -63,22 +63,22 @@ chatroom.getChats((data) => {
 });
 
 ///////////////////////////This is to delete all docs as specified with where
-db.collection('chats')
-  .where('room', '==', 'music')
-  .get()
-  .then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      //   console.log(doc.ref);
-      doc.ref
-        .delete()
-        .then(() => {
-          console.log('Blake has been purged from existence');
-        })
-        .catch((error) => {
-          console.log('I swear to fuck', error);
-        });
-    });
-  })
-  .catch((error) => {
-    console.log('FUCK', error);
-  });
+// db.collection('chats')
+//   .where('room', '==', 'music')
+//   .get()
+//   .then((querySnapshot) => {
+//     querySnapshot.forEach((doc) => {
+//       //   console.log(doc.ref);
+//       doc.ref
+//         .delete()
+//         .then(() => {
+//           console.log('Blake has been purged from existence');
+//         })
+//         .catch((error) => {
+//           console.log('I swear to fuck', error);
+//         });
+//     });
+//   })
+//   .catch((error) => {
+//     console.log('FUCK', error);
+//   });
