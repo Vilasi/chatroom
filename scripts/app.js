@@ -35,7 +35,6 @@ updateNameForm.addEventListener('submit', (event) => {
 
   // temporarily show the update message
   updateMessage.innerText = `Your name was updated to ${name}`;
-  updateMessage.scrollIntoView();
   setTimeout(() => {
     updateMessage.innerText = '';
   }, 4000);
