@@ -16,6 +16,7 @@ class Chatroom {
   async addChat(message) {
     //Format the chat object
     const now = new Date();
+
     const chat = {
       username: this.username,
       room: this.room,
@@ -34,10 +35,13 @@ class Chatroom {
     //This will be stored in the constructor function of the object
     this.unsubscribe = this.chats
       .where('room', '==', this.room)
-      // .orderBy('created_at')
-      .onSnapshot((snapshot) => {
-        snapshot.docChanges().forEach((change) => {
+      .orderBy('created_at')
+      .onSnapshot((querySnapshot) => {
+        // console.log(querySnapshot.docChanges());
+        querySnapshot.docChanges().forEach((change) => {
+          // console.log(change);
           if (change.type === 'added') {
+            // console.log(change.doc.data().created_at);
             callback(change.doc.data());
           }
         });
