@@ -27,6 +27,7 @@ class Chatroom {
     //save the chat document
     //Because this function is contained within an async function, and is itself async, we use await
     const response = await this.chats.add(chat);
+
     return response;
   }
   getChats(callback) {
@@ -35,13 +36,14 @@ class Chatroom {
     //This will be stored in the constructor function of the object
     this.unsubscribe = this.chats
       .where('room', '==', this.room)
-      .orderBy('created_at')
+      .orderBy('created_at', 'desc')
       .onSnapshot((querySnapshot) => {
         // console.log(querySnapshot.docChanges());
         querySnapshot.docChanges().forEach((change) => {
           // console.log(change);
           if (change.type === 'added') {
             // console.log(change.doc.data().created_at);
+
             callback(change.doc.data());
           }
         });

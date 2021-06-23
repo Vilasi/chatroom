@@ -14,6 +14,7 @@ newChatForm.addEventListener('submit', (event) => {
     .addChat(message)
     .then(() => {
       newChatForm.reset();
+      location.reload();
     })
     .catch((err) => {
       console.log(err);
@@ -64,11 +65,11 @@ chatroom.getChats((data) => {
 
 ///////////////////////////This is to delete all docs as specified with where
 // db.collection('chats')
-//   .where('room', '==', 'music')
+//   .where('username', '==', 'anon')
 //   .get()
 //   .then((querySnapshot) => {
 //     querySnapshot.forEach((doc) => {
-//       //   console.log(doc.ref);
+//         // console.log(doc.ref);
 //       doc.ref
 //         .delete()
 //         .then(() => {
