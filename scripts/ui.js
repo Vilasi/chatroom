@@ -21,8 +21,11 @@ class ChatUI {
       addSuffix: true,
     });
 
+    // if name is stored in local storage, use that name
     if (localStorage.name) {
       chatroom.updateName(localStorage.name);
+    } else {
+      chatroom.updateName('anon');
     }
 
     const html = `

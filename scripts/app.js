@@ -2,6 +2,7 @@
 const chatList = document.querySelector('ul.chat-list');
 const newChatForm = document.querySelector('form.new-chat');
 const updateNameForm = document.querySelector('form.new-name');
+const updateMessage = document.querySelector('.update-mssg');
 const roomButtons = document.querySelector('div.chat-rooms');
 
 // add a new chat
@@ -22,11 +23,21 @@ newChatForm.addEventListener('submit', (event) => {
 // update username
 updateNameForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  const name = updateNameForm.name.value.trim();
 
+  // update name via chatroom. Store in local storage
+  const name = updateNameForm.name.value.trim();
   localStorage.setItem('name', updateNameForm.name.value.trim());
   chatroom.updateName(name);
+
+  // reset form
   updateNameForm.reset();
+
+  // temporarily show the update message
+  updateMessage.innerText = `Your name was updated to ${name}`;
+  updateMessage.scrollIntoView();
+  setTimeout(() => {
+    updateMessage.innerText = '';
+  }, 4000);
 });
 
 // change rooms
@@ -51,23 +62,23 @@ chatroom.getChats((data) => {
   chatUI.render(data);
 });
 
-///////////////////////////This was to delete all docs with username Blake.
-// db.collection('chats')
-//   .where('username', '==', 'Blake')
-//   .get()
-//   .then((querySnapshot) => {
-//     querySnapshot.forEach((doc) => {
-//       //   console.log(doc.ref);
-//       doc.ref
-//         .delete()
-//         .then(() => {
-//           console.log('Blake has been purged from existence');
-//         })
-//         .catch((error) => {
-//           console.log('I swear to fuck', error);
-//         });
-//     });
-//   })
-//   .catch((error) => {
-//     console.log('FUCK', error);
-//   });
+///////////////////////////This is to delete all docs as specified with where
+db.collection('chats')
+  .where('room', '==', 'music')
+  .get()
+  .then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      //   console.log(doc.ref);
+      doc.ref
+        .delete()
+        .then(() => {
+          console.log('Blake has been purged from existence');
+        })
+        .catch((error) => {
+          console.log('I swear to fuck', error);
+        });
+    });
+  })
+  .catch((error) => {
+    console.log('FUCK', error);
+  });
