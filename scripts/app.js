@@ -4,6 +4,15 @@ const newChatForm = document.querySelector('form.new-chat');
 const updateNameForm = document.querySelector('form.new-name');
 const updateMessage = document.querySelector('.update-mssg');
 const roomButtons = document.querySelector('div.chat-rooms');
+const refreshButton = document.querySelector('div.refresh');
+
+// refresh the page
+refreshButton.addEventListener('click', (event) => {
+  console.log(event.target.nodeName);
+  if (event.target.nodeName === 'BUTTON') {
+    location.reload();
+  }
+});
 
 // add a new chat
 newChatForm.addEventListener('submit', (event) => {
@@ -68,7 +77,7 @@ chatroom.getChats((data) => {
 //   .get()
 //   .then((querySnapshot) => {
 //     querySnapshot.forEach((doc) => {
-//         // console.log(doc.ref);
+//       // console.log(doc.ref);
 //       doc.ref
 //         .delete()
 //         .then(() => {
