@@ -1,11 +1,3 @@
-//adding new chat documents
-
-//setting up real-time listener to get new chats
-
-//updating the username
-
-//updating the room
-
 class Chatroom {
   constructor(room, username) {
     this.username = username;
@@ -65,25 +57,3 @@ class Chatroom {
     }
   }
 }
-
-//This will emulate the user changing the room after a few seconds of being on the website
-// setTimeout(() => {
-//   chatroom.updateRoom('general');
-//   chatroom.updateName('Blake');
-//   chatroom.getChats((data) => {
-//     console.log(data);
-//   });
-//   chatroom.addChat('hello');
-// }, 3000);
-
-// chatroom.updateRoom('ufos');
-// console.log(chatroom);
-
-// chatroom
-//   .addChat('hello everyone')
-//   .then(() => {
-//     console.log('chat added');
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
