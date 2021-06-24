@@ -10,7 +10,18 @@ const refreshButton = document.querySelector('div.refresh');
 refreshButton.addEventListener('click', (event) => {
   console.log(event.target.nodeName);
   if (event.target.nodeName === 'BUTTON') {
-    location.reload();
+    if (localStorage.room) {
+      chatroom.updateRoom(localStorage.room);
+    } else {
+      chatroom.updateRoom('general');
+    }
+    // location.reload();
+
+    // Allows the Firebase Desc order to render properly
+    chatUI.list.innerHTML = '';
+    chatroom.getChats((data) => {
+      chatUI.render(data);
+    });
   }
 });
 
@@ -23,7 +34,10 @@ newChatForm.addEventListener('submit', (event) => {
     .addChat(message)
     .then(() => {
       newChatForm.reset();
-      location.reload();
+      chatUI.list.innerHTML = '';
+      chatroom.getChats((data) => {
+        chatUI.render(data);
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -54,6 +68,8 @@ roomButtons.addEventListener('click', (event) => {
   console.log(event.target.nodeName);
   if (event.target.nodeName === 'BUTTON') {
     chatroom.updateRoom(event.target.id);
+
+    localStorage.setItem('room', event.target.id);
     chatList.innerHTML = '';
 
     chatroom.getChats((data) => {
